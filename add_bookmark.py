@@ -18,6 +18,17 @@ def extract_bookmark_name(text):
 
 
     if match and count_chinese_characters(match.group()) < 10:
+        chapter_title = find_chapter_title(text)
+        if chapter_title:
+            return match.group() + chapter_title
+        return match.group()
+    return None
+
+def find_chapter_title(text):
+    pattern = r'【.*?】'
+    match = re.search(pattern, text)
+
+    if match:
         return match.group()
     return None
 
